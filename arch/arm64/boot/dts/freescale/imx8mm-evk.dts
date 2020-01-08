@@ -299,6 +299,10 @@
 	status = "okay";
 };
 
+&lcdif {
+	status = "okay";
+};
+
 &usbotg1 {
 	dr_mode = "otg";
 	hnp-disable;

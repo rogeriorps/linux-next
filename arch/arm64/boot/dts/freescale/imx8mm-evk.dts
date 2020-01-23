@@ -303,6 +303,10 @@
 	status = "okay";
 };
 
+&mipi_dsi {
+	status = "okay";
+};
+
 &usbotg1 {
 	dr_mode = "otg";
 	hnp-disable;

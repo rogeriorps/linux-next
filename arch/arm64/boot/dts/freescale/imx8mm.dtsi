@@ -826,7 +826,28 @@
           <&clk IMX8MM_CLK_LCDIF_PIXEL>;
         clock-names = "pix", "axi";
         status = "disabled";
+
+        lcdif_disp0: port@0 {
+			     lcdif_to_dsim: endpoint {
+				       remote-endpoint = <&dsim_from_lcdif>;
+			     };
+		    };
       };
+
+      mipi_dsi: mipi_dsi@32E10000 {
+    		#address-cells = <1>;
+    		#size-cells = <0>;
+    		compatible = "fsl,imx8mm-mipi-dsim";
+    		reg = <0x0 0x32e10000 0x0 0x400>;
+    		status = "disabled";
+        port@0 {
+			     dsim_from_lcdif: endpoint {
+				       remote-endpoint = <&lcdif_to_dsim>;
+    			 };
+    		};
+
+    	};
+
 		};
 
 		dma_apbh: dma-controller@33000000 {

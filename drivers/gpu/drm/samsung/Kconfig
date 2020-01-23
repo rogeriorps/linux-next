@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: GPL-2.0-only
+config DRM_SAMSUNG_MIPI_DSI
+	tristate "Samsung MIPI-DSI Host DSI Controller"
+	depends on DRM
+	default y
+	help
+	  Choose this option if you have an Freescale DCU chipset.
+	  If M is selected the module will be called fsl-dcu-drm.
+

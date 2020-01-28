@@ -827,26 +827,38 @@
         clock-names = "pix", "axi";
         status = "disabled";
 
-        lcdif_disp0: port@0 {
-			     lcdif_to_dsim: endpoint {
-				       remote-endpoint = <&dsim_from_lcdif>;
-			     };
-		    };
+        port {
+          lcdif_to_dsim: endpoint {
+            remote-endpoint = <&dsim_from_lcdif>;
+          };
+        };
+
       };
+
+
+
 
       mipi_dsi: mipi_dsi@32E10000 {
     		#address-cells = <1>;
     		#size-cells = <0>;
     		compatible = "fsl,imx8mm-mipi-dsim";
     		reg = <0x0 0x32e10000 0x0 0x400>;
+        phys = <&dphy>;
+        phy-names = "dphy";
     		status = "disabled";
-        port@0 {
+        port {
 			     dsim_from_lcdif: endpoint {
 				       remote-endpoint = <&lcdif_to_dsim>;
     			 };
     		};
 
     	};
+
+      dphy: dphy@30a0030 {
+      	compatible = "fsl,imx8mm-mipi-dphy";
+      	reg = <0x30a00300 0x100>;
+      	#phy-cells = <0>;
+      };
 
 		};
 

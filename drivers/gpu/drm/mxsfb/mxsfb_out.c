@@ -81,8 +81,11 @@ int mxsfb_create_output(struct drm_device *drm)
 
 	ret = drm_of_find_panel_or_bridge(drm->dev->of_node, 0, 0,
 					  &mxsfb->panel, &mxsfb->bridge);
-	if (ret)
-		return ret;
+	if (ret) {
+				printk(KERN_INFO "!!!Return of drm_of_find_panel_or_bridge: %d", ret);
+				return ret;
+		}
+
 
 	if (mxsfb->panel) {
 		mxsfb->connector = &mxsfb->panel_connector;
@@ -95,5 +98,6 @@ int mxsfb_create_output(struct drm_device *drm)
 					 DRM_MODE_CONNECTOR_Unknown);
 	}
 
+	printk(KERN_INFO "!!!!Return of drm_of_find_panel_or_bridge: %d", ret);
 	return ret;
 }

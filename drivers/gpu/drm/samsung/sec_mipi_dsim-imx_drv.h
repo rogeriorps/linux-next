@@ -52,7 +52,7 @@ struct sec_dsim_dsi {
 
 //	struct nwl_dsi_transfer *xfer;
 
-//	const struct nwl_dsi_platform_data *pdata;
+	const struct nwl_dsi_platform_data *pdata;
 };
 
 

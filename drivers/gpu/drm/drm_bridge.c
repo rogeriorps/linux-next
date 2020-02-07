@@ -116,14 +116,20 @@ int drm_bridge_attach(struct drm_encoder *encoder, struct drm_bridge *bridge,
 {
 	int ret;
 
-	if (!encoder || !bridge)
+	if (!encoder || !bridge) {
+		printk(KERN_INFO "!! ret1\n");
 		return -EINVAL;
+	}
 
-	if (previous && (!previous->dev || previous->encoder != encoder))
+	if (previous && (!previous->dev || previous->encoder != encoder)){
+		printk(KERN_INFO "!! ret2\n");
 		return -EINVAL;
+		}
 
-	if (bridge->dev)
+	if (bridge->dev) {
+		printk(KERN_INFO "!! ret3\n");
 		return -EBUSY;
+	}
 
 	bridge->dev = encoder->dev;
 	bridge->encoder = encoder;
@@ -139,10 +145,11 @@ int drm_bridge_attach(struct drm_encoder *encoder, struct drm_bridge *bridge,
 			list_del(&bridge->chain_node);
 			bridge->dev = NULL;
 			bridge->encoder = NULL;
+			printk(KERN_INFO "!! ret4\n");
 			return ret;
 		}
 	}
-
+	printk(KERN_INFO "!! ret5\n");
 	return 0;
 }
 EXPORT_SYMBOL(drm_bridge_attach);
@@ -533,13 +540,16 @@ struct drm_bridge *of_drm_find_bridge(struct device_node *np)
 	mutex_lock(&bridge_lock);
 
 	list_for_each_entry(bridge, &bridge_list, list) {
+			printk(KERN_INFO "!! list_for_each_entry %s\n", __func__);
 		if (bridge->of_node == np) {
+			printk(KERN_INFO "!! yes, we have a bridge %s\n", __func__);
 			mutex_unlock(&bridge_lock);
 			return bridge;
 		}
 	}
 
 	mutex_unlock(&bridge_lock);
+	printk(KERN_INFO "!! no, we don't have a bridge %s\n", __func__);
 	return NULL;
 }
 EXPORT_SYMBOL(of_drm_find_bridge);

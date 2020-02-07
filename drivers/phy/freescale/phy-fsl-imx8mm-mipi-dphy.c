@@ -437,6 +437,11 @@ static int mixel_dphy_probe(struct platform_device *pdev)
 	struct phy *phy;
 	void __iomem *base;
 
+  printk(KERN_INFO "!!! DPHY Probe !!!");
+
+  return 0;
+
+/*
 	if (!np)
 		return -ENODEV;
 
@@ -480,6 +485,8 @@ static int mixel_dphy_probe(struct platform_device *pdev)
 	phy_provider = devm_of_phy_provider_register(dev, of_phy_simple_xlate);
 
 	return PTR_ERR_OR_ZERO(phy_provider);
+  */
+
 }
 
 static struct platform_driver mixel_dphy_driver = {
